@@ -28,20 +28,51 @@ class Faq extends Module
       $this->warning = $this->l('No name provided');
   }
 
+  // public function install()
+  // {
+  //   if (Shop::isFeatureActive())
+  //     Shop::setContext(Shop::CONTEXT_ALL);
+  //
+  //   if (!parent::install() ||
+  //     !$this->registerHook('leftColumn') ||
+  //     !$this->registerHook('header') ||
+  //     !Configuration::updateValue('FAQ_NAME', 'my friend')
+  //   )
+  //     return false;
+  //
+  //   return true;
+  // }
+
   public function install()
   {
     if (Shop::isFeatureActive())
       Shop::setContext(Shop::CONTEXT_ALL);
 
-    if (!parent::install() ||
-      !$this->registerHook('leftColumn') ||
-      !$this->registerHook('header') ||
-      !Configuration::updateValue('FAQ_NAME', 'my friend')
-    )
-      return false;
-
-    return true;
+    return parent::install() &&
+      // $this->registerHook('leftColumn') &&
+      $this->registerHook('displayFooter') &&
+      Configuration::updateValue('FAQ_NAME', 'my friend');
   }
+
+
+  public function hookDisplayHeader() // appelé dans la balise head ou on link le css habituellement
+  {
+    $this->context->controller->addCSS($this->_path.'css/faq.css', 'all');
+  }
+
+
+  public function hookDisplayFooter($params)
+  {
+    $this->context->smarty->assign(
+        array(
+            'faq_name' => Configuration::get('FAQ_NAME'),
+            'faq_link' => $this->context->link->getModuleLink('faq', 'display')
+        )
+    );
+    return $this->display(__FILE__, 'faq.tpl');// correspond au fichier /views/templates/hook/faq.tpl
+  }
+
+
 
   public function uninstall()
   {
