@@ -50,8 +50,7 @@ class Faq extends Module
 
     return parent::install() &&
       // $this->registerHook('leftColumn') &&
-      $this->registerHook('displayFooter') &&
-      Configuration::updateValue('FAQ_NAME', 'my friend');
+      $this->registerHook('displayFooter') && Configuration::updateValue('FAQ_NAME', 'my friend');
   }
 
 

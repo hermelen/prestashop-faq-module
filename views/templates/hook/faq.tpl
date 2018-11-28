@@ -1,12 +1,12 @@
 <!-- Block faq -->
 <div id="faq_block_home" class="block">
-  <h4>Welcome!</h4>
+  <h4>FAQ</h4>
   <div class="block_content">
-    <p>Hello,
+    <p>Ask us
        {if isset($faq_name) && $faq_name}
            {$faq_name}
        {else}
-           World
+           No module name
        {/if}
        !
     </p>
