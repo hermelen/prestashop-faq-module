@@ -4,6 +4,7 @@ if (!defined('_PS_VERSION_'))
   exit;
 }
 
+require "models/faq.php";
 
 class Faq extends Module
 {
@@ -55,11 +56,10 @@ class Faq extends Module
     }
 
     return parent::install() &&
-      // $this->registerHook('leftColumn') &&
+      $this->registerHook('header') &&
       $this->registerHook('displayFooter')
       && Configuration::updateValue('FAQ_NAME', 'FAQ');
   }
-
 
   public function hookDisplayHeader() // appelé dans la balise head ou on link le css habituellement
   {

@@ -1,6 +1,7 @@
 .faq-form {
   display: flex;
   flex-direction: column;
+  background-color: grey;
 }
 
 #faq_block_home {

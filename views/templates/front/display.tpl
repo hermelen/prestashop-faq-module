@@ -5,7 +5,7 @@
   <label for="username">Your name:</label>
   <input type="text" name="username" value="">
   <label for="question">Your question:</label>
-  <textarea name="question" rows="8" cols="80"></textarea>
-  <input type="submit" value="Submit">
+  <textarea name="question" rows="8"></textarea>
+  <input type="submit" value="Submit" name="submit_faq">
 </form>
 {/block}
