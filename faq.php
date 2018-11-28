@@ -45,12 +45,19 @@ class Faq extends Module
 
   public function install()
   {
-    if (Shop::isFeatureActive())
+    if (Shop::isFeatureActive()) {
       Shop::setContext(Shop::CONTEXT_ALL);
+    }
+
+    include(dirname(__FILE__).'/sql/install.php');
+    if(!$result=Db::getInstance()->Execute($sql)) {
+      return false;
+    }
 
     return parent::install() &&
       // $this->registerHook('leftColumn') &&
-      $this->registerHook('displayFooter') && Configuration::updateValue('FAQ_NAME', 'my friend');
+      $this->registerHook('displayFooter')
+      && Configuration::updateValue('FAQ_NAME', 'FAQ');
   }
 
 
@@ -76,10 +83,13 @@ class Faq extends Module
 
   public function uninstall()
   {
-    if (!parent::uninstall() ||
-      !Configuration::deleteByName('FAQ_NAME')
-    )
+    if (!parent::uninstall() || !Configuration::deleteByName('FAQ_NAME')) {
       return false;
+    }
+    include(dirname(__FILE__).'/sql/uninstall.php');
+    if(!$result=Db::getInstance()->Execute($sql)) {
+      return false;
+    }
 
     return true;
   }
