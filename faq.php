@@ -65,7 +65,8 @@ class Faq extends Module
     $this->context->smarty->assign(
         array(
             'faq_name' => Configuration::get('FAQ_NAME'),
-            'faq_link' => $this->context->link->getModuleLink('faq', 'display')
+            'faq_link' => $this->context->link->getModuleLink('faq', 'display'),
+            'faq_message' => $this->l('This is a FAQ message')
         )
     );
     return $this->display(__FILE__, 'faq.tpl');// correspond au fichier /views/templates/hook/faq.tpl

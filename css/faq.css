@@ -1,0 +1,8 @@
+.faq-form {
+  display: flex;
+  flex-direction: column;
+}
+
+#faq_block_home {
+  background-color: grey;
+}
