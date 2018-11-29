@@ -22,4 +22,13 @@ class FaqModel extends ObjectModel {
       ]
     )
   ];
+  public function displayQuestions() {
+    $sql = new DbQuery();
+    $sql->select('*');
+    $sql->from('faq', 'f');
+    $sql->where('f.answer IS NOT NULL');
+    // $sql->innerJoin('cms_lang', 'l', 'c.id_cms = l.id_cms AND l.id_lang = '.(int)$id_lang);
+    // $sql->orderBy('position');
+    return Db::getInstance()->executeS($sql);
+  }
 }
